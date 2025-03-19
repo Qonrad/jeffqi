@@ -3,19 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Translation Dropdown</title>
+    <title>Translation Tool</title>
+    <script defer src="script.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 20px auto;
+            text-align: center;
+        }
+        select, p {
+            font-size: 18px;
+            padding: 10px;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h2>Diet Translation Selector</h2>
-    <label for="languageSelect">Select Language:</label>
-    <select id="languageSelect"></select>
+
+    <h2>Diet Instructions</h2>
+    <label for="language-select">Choose Language:</label>
+    <select id="language-select"></select>
     
-    <h3>Diet Options</h3>
-    <label for="dietSelect">Select Diet:</label>
-    <select id="dietSelect"></select>
-    
-    <p id="translatedText"></p>
-    
-    <script src="script.js"></script>
+    <p id="translation"></p>
+
 </body>
 </html>
