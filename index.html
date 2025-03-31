@@ -7,16 +7,27 @@
     body {
       font-family: sans-serif;
       margin: 0;
-      padding: 1rem;
+      padding: 2rem;
     }
 
     .split-view {
       display: flex;
-      gap: 2rem;
+      gap: 3rem;
     }
 
     .column {
       flex: 1;
+    }
+
+    .section {
+      margin-bottom: 2rem;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      margin-top: 1rem;
     }
 
     select, pre, button {
@@ -26,11 +37,16 @@
     }
 
     pre {
-      padding: 0.5rem;
-      background: #f0f0f0;
+      padding: 1rem;
+      background: #f8f8f8;
       border: 1px solid #ccc;
       white-space: pre-wrap;
-      min-height: 5rem;
+      min-height: 6rem;
+    }
+
+    button {
+      padding: 0.75rem;
+      font-size: 1rem;
     }
   </style>
 </head>
@@ -40,31 +56,59 @@
     <!-- English Side -->
     <div class="column">
       <h3>English Instructions</h3>
-      <select id="diet-select">
-        <option value="">-- Select Diet Instruction --</option>
-      </select>
+
+      <div class="section">
+        <label for="select-consult">Consult</label>
+        <select id="select-consult"></select>
+      </div>
+
+      <div class="section">
+        <label for="select-diet">Diet</label>
+        <select id="select-diet"></select>
+      </div>
+
+      <div class="section">
+        <label for="select-habit">Habit</label>
+        <select id="select-habit"></select>
+      </div>
+
+      <div class="section">
+        <label for="select-rx">Medications (Rx)</label>
+        <select id="select-rx"></select>
+      </div>
+
+      <div class="section">
+        <label for="select-returns">Returns</label>
+        <select id="select-returns"></select>
+      </div>
+
+      <div class="section">
+        <label for="select-wc">Wound Care</label>
+        <select id="select-wc"></select>
+      </div>
+
       <pre id="english-box"></pre>
     </div>
 
     <!-- Translation Side -->
     <div class="column">
       <h3>
-        <label for="language-select">Language: </label>
+        <label for="language-select">Language</label>
         <select id="language-select">
           <option value="spanish">Spanish</option>
-          <option value="cantonese">Cantonese</option>
+          <option value="cantonese (traditional)">Cantonese</option>
           <option value="mandarin (simplified)">Mandarin</option>
           <option value="filipino (tagalog)">Tagalog</option>
           <option value="vietnamese">Vietnamese</option>
           <option value="russian">Russian</option>
         </select>
       </h3>
+
       <pre id="translated-box"></pre>
     </div>
   </div>
 
   <button onclick="copyToClipboard()">Copy Both</button>
-
   <script src="script.js"></script>
 </body>
 </html>

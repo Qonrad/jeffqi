@@ -1,3 +1,4 @@
+const categories = ['consult', 'diet', 'habit', 'rx', 'returns', 'wc'];
 // Minimal embedded JSON for one category
 const phrases = {
     "consult": [
@@ -1364,41 +1365,60 @@ const phrases = {
     ]
 };
 let selectedLanguage = "spanish";
-let selectedPhraseId = null;
-const dietSelect = document.getElementById("diet-select");
-const langSelect = document.getElementById("language-select");
-const englishBox = document.getElementById("english-box");
-const translatedBox = document.getElementById("translated-box");
-// Populate diet select options
-phrases.diet.forEach((phrase) => {
-    const option = document.createElement("option");
-    option.value = phrase.id;
-    option.textContent = phrase.english;
-    dietSelect.appendChild(option);
-});
-// Event: change selection
-dietSelect.addEventListener("change", () => {
-    selectedPhraseId = dietSelect.value;
-    render();
-});
-// Event: change language
-langSelect.addEventListener("change", () => {
-    selectedLanguage = langSelect.value;
-    render();
-});
+let selectedPhrases = {};
+function populateDropdown(category) {
+    const select = document.getElementById(`select-${category}`);
+    if (!select)
+        return;
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.textContent = `-- Select ${category} instruction --`;
+    select.appendChild(defaultOption);
+    phrases[category].forEach((phrase) => {
+        const option = document.createElement("option");
+        option.value = phrase.id;
+        option.textContent = phrase.english;
+        select.appendChild(option);
+    });
+    select.addEventListener("change", () => {
+        selectedPhrases[category] = select.value;
+        render();
+    });
+}
+function getPhrase(category, id) {
+    return phrases[category].find((p) => p.id === id);
+}
 function render() {
-    if (!selectedPhraseId) {
-        englishBox.textContent = "";
-        translatedBox.textContent = "";
-        return;
+    const englishOutput = [];
+    const translatedOutput = [];
+    for (const category of categories) {
+        const id = selectedPhrases[category];
+        if (!id)
+            continue;
+        const phrase = getPhrase(category, id);
+        if (phrase) {
+            englishOutput.push(phrase.english);
+            translatedOutput.push(phrase[selectedLanguage]);
+        }
     }
-    const phrase = phrases.diet.find((p) => p.id === selectedPhraseId);
-    if (!phrase)
-        return;
-    englishBox.textContent = phrase.english;
-    translatedBox.textContent = phrase[selectedLanguage];
+    const englishBox = document.getElementById("english-box");
+    const translatedBox = document.getElementById("translated-box");
+    englishBox.textContent = englishOutput.join("\n\n");
+    translatedBox.textContent = translatedOutput.join("\n\n");
 }
 function copyToClipboard() {
-    const text = englishBox.textContent + "\n\n" + translatedBox.textContent;
+    const english = document.getElementById("english-box").textContent;
+    const translated = document.getElementById("translated-box").textContent;
+    const text = english + "\n\n" + translated;
     navigator.clipboard.writeText(text);
 }
+document.addEventListener("DOMContentLoaded", () => {
+    for (const category of categories) {
+        populateDropdown(category);
+    }
+    const langSelect = document.getElementById("language-select");
+    langSelect.addEventListener("change", () => {
+        selectedLanguage = langSelect.value;
+        render();
+    });
+});

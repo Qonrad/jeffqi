@@ -1,3 +1,14 @@
+﻿
+const categories = ['consult', 'diet', 'habit', 'rx', 'returns', 'wc'];
+
+type Language =
+  | "spanish"
+  | "cantonese (traditional)"
+  | "mandarin (simplified)"
+  | "filipino (tagalog)"
+  | "vietnamese"
+  | "russian";
+
 // Minimal embedded JSON for one category
 const phrases = {
     "consult": [
@@ -1364,58 +1375,71 @@ const phrases = {
     ]
   };
   
-  type Language =
-    | "spanish"
-    | "cantonese (traditional"
-    | "mandarin (simplified)"
-    | "filipino (tagalog)"
-    | "vietnamese"
-    | "russian";
-  
   let selectedLanguage: Language = "spanish";
-  let selectedPhraseId: string | null = null;
+  let selectedPhrases: { [category: string]: string } = {};
   
-  const dietSelect = document.getElementById("diet-select") as HTMLSelectElement;
-  const langSelect = document.getElementById("language-select") as HTMLSelectElement;
-  const englishBox = document.getElementById("english-box")!;
-  const translatedBox = document.getElementById("translated-box")!;
+  function populateDropdown(category: string) {
+    const select = document.getElementById(`select-${category}`) as HTMLSelectElement;
+    if (!select) return;
   
-  // Populate diet select options
-  phrases.diet.forEach((phrase) => {
-    const option = document.createElement("option");
-    option.value = phrase.id;
-    option.textContent = phrase.english;
-    dietSelect.appendChild(option);
-  });
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.textContent = `-- Select ${category} instruction --`;
+    select.appendChild(defaultOption);
   
-  // Event: change selection
-  dietSelect.addEventListener("change", () => {
-    selectedPhraseId = dietSelect.value;
-    render();
-  });
+    phrases[category].forEach((phrase: any) => {
+      const option = document.createElement("option");
+      option.value = phrase.id;
+      option.textContent = phrase.english;
+      select.appendChild(option);
+    });
   
-  // Event: change language
-  langSelect.addEventListener("change", () => {
-    selectedLanguage = langSelect.value as Language;
-    render();
-  });
+    select.addEventListener("change", () => {
+      selectedPhrases[category] = select.value;
+      render();
+    });
+  }
+  
+  function getPhrase(category: string, id: string) {
+    return phrases[category].find((p: any) => p.id === id);
+  }
   
   function render() {
-    if (!selectedPhraseId) {
-      englishBox.textContent = "";
-      translatedBox.textContent = "";
-      return;
+    const englishOutput: string[] = [];
+    const translatedOutput: string[] = [];
+  
+    for (const category of categories) {
+      const id = selectedPhrases[category];
+      if (!id) continue;
+  
+      const phrase = getPhrase(category, id);
+      if (phrase) {
+        englishOutput.push(phrase.english);
+        translatedOutput.push(phrase[selectedLanguage]);
+      }
     }
   
-    const phrase = phrases.diet.find((p) => p.id === selectedPhraseId);
-    if (!phrase) return;
-  
-    englishBox.textContent = phrase.english;
-    translatedBox.textContent = phrase[selectedLanguage];
+    const englishBox = document.getElementById("english-box")!;
+    const translatedBox = document.getElementById("translated-box")!;
+    englishBox.textContent = englishOutput.join("\n\n");
+    translatedBox.textContent = translatedOutput.join("\n\n");
   }
   
   function copyToClipboard() {
-    const text = englishBox.textContent + "\n\n" + translatedBox.textContent;
+    const english = (document.getElementById("english-box") as HTMLElement).textContent;
+    const translated = (document.getElementById("translated-box") as HTMLElement).textContent;
+    const text = english + "\n\n" + translated;
     navigator.clipboard.writeText(text);
   }
   
+  document.addEventListener("DOMContentLoaded", () => {
+    for (const category of categories) {
+      populateDropdown(category);
+    }
+  
+    const langSelect = document.getElementById("language-select") as HTMLSelectElement;
+    langSelect.addEventListener("change", () => {
+      selectedLanguage = langSelect.value as Language;
+      render();
+    });
+  });
