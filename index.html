@@ -1,31 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QI Translation</title>
-    <script defer src="script.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 600px;
-            margin: 20px auto;
-            text-align: center;
-        }
-        select, p {
-            font-size: 18px;
-            padding: 10px;
-            margin-top: 10px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Discharge Instructions</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 1rem;
+    }
+
+    .split-view {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .column {
+      flex: 1;
+    }
+
+    select, pre, button {
+      width: 100%;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    pre {
+      padding: 0.5rem;
+      background: #f0f0f0;
+      border: 1px solid #ccc;
+      white-space: pre-wrap;
+      min-height: 5rem;
+    }
+  </style>
 </head>
 <body>
+  <h1>Discharge Instructions</h1>
+  <div class="split-view">
+    <!-- English Side -->
+    <div class="column">
+      <h3>English Instructions</h3>
+      <select id="diet-select">
+        <option value="">-- Select Diet Instruction --</option>
+      </select>
+      <pre id="english-box"></pre>
+    </div>
 
-    <h2>Diet Instructions proof of concept</h2>
-    <label for="language-select">Choose Language:</label>
-    <select id="language-select"></select>
-    
-    <p id="translation"></p>
+    <!-- Translation Side -->
+    <div class="column">
+      <h3>
+        <label for="language-select">Language: </label>
+        <select id="language-select">
+          <option value="spanish">Spanish</option>
+          <option value="cantonese">Cantonese</option>
+          <option value="mandarin (simplified)">Mandarin</option>
+          <option value="filipino (tagalog)">Tagalog</option>
+          <option value="vietnamese">Vietnamese</option>
+          <option value="russian">Russian</option>
+        </select>
+      </h3>
+      <pre id="translated-box"></pre>
+    </div>
+  </div>
 
+  <button onclick="copyToClipboard()">Copy Both</button>
+
+  <script src="script.js"></script>
 </body>
 </html>
