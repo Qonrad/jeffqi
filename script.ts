@@ -1515,8 +1515,8 @@ const phrases = {
     // Add medications if any exist
     if (medications.length > 0) {
       // Add medication header
-      englishBox.textContent += "Medications:\n";
-      translatedBox.textContent += "Medications:\n";
+      englishBox.textContent += medTranslations.header.english + '\n';
+      translatedBox.textContent += medTranslations.header[language] + '\n';
 
       medications.forEach(med => {
         const frequencyText = medTranslations.frequencies[med.frequency];
@@ -1662,9 +1662,19 @@ const phrases = {
     prnReasons: {
       [key: string]: TranslatedText;
     };
+    header: TranslatedText;
   }
 
   const medTranslations: MedTranslations = {
+    header: {
+      english: "Please start the medications below:",
+      spanish: "Por favor, comience a tomar los siguientes medicamentos:",
+      "cantonese (traditional)": "請開始服用以下藥物：",
+      "mandarin (simplified)": "请开始服用以下药物：",
+      "filipino (tagalog)": "Pakisimulan ang mga gamot sa ibaba:",
+      vietnamese: "Hãy bắt đầu dùng các thuốc dưới đây:",
+      russian: "Пожалуйста, начните принимать следующие лекарства:"
+    },
     frequencies: {
       "once_morning": {
         english: "Once in the morning",
