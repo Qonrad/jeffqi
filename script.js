@@ -1,4 +1,60 @@
 const categories = ['consult', 'diet', 'habit', 'rx', 'returns', 'wc'];
+const headers = {
+    diet: {
+        'english': 'Diet:',
+        'spanish': 'Dieta:',
+        'cantonese (traditional)': '飲食：',
+        'mandarin (simplified)': '饮食：',
+        'filipino (tagalog)': 'Diyeta:',
+        'vietnamese': 'Chế độ ăn:',
+        'russian': 'Диета:'
+    },
+    activity: {
+        'english': 'Activity:',
+        'spanish': 'Actividad:',
+        'cantonese (traditional)': '活動：',
+        'mandarin (simplified)': '活动：',
+        'filipino (tagalog)': 'Aktibidad:',
+        'vietnamese': 'Hoạt động:',
+        'russian': 'Активность:'
+    },
+    habits: {
+        'english': 'Habits consulting:',
+        'spanish': 'Asesoramiento sobre hábitos:',
+        'cantonese (traditional)': '習慣諮詢：',
+        'mandarin (simplified)': '习惯咨询：',
+        'filipino (tagalog)': 'Konsultasyon sa mga nakasanayan:',
+        'vietnamese': 'Tư vấn về thói quen:',
+        'russian': 'Консультация по привычкам:'
+    },
+    woundCare: {
+        'english': 'Wound care:',
+        'spanish': 'Cuidado de la herida:',
+        'cantonese (traditional)': '傷口護理：',
+        'mandarin (simplified)': '伤口护理：',
+        'filipino (tagalog)': 'Pangangalaga sa sugat:',
+        'vietnamese': 'Chăm sóc vết thương:',
+        'russian': 'Уход за раной:'
+    },
+    followUp: {
+        'english': 'Follow up',
+        'spanish': 'Seguimiento',
+        'cantonese (traditional)': '後續檢查',
+        'mandarin (simplified)': '后续就诊',
+        'filipino (tagalog)': 'Pagsubaybay',
+        'vietnamese': 'Tái khám / Theo dõi',
+        'russian': 'Дальнейшее наблюдение'
+    },
+    returnPrecautions: {
+        'english': 'Return precautions:',
+        'spanish': 'Precauciones de regreso:',
+        'cantonese (traditional)': '回診注意事項：',
+        'mandarin (simplified)': '回诊注意事项：',
+        'filipino (tagalog)': 'Mga pag-iingat sa pagbabalik:',
+        'vietnamese': 'Các lưu ý khi quay lại khám:',
+        'russian': 'Рекомендации при возвращении на прием:'
+    }
+};
 // Minimal embedded JSON for one category
 const phrases = {
     "consult": [
@@ -1022,7 +1078,7 @@ const phrases = {
         },
         {
             "id": "returns_2",
-            "english": "Worsening redness, warmth, drainage or swelling around the wound.",
+            "english": "Worsening redness, warmth, drainage or swelling around the wound.",
             "spanish": "Empeoramiento del enrojecimiento, calor, secreción o hinchazón alrededor de la herida.",
             "cantonese (traditional)": "傷口周圍的發紅、發熱、分泌物或腫脹加重。",
             "mandarin (simplified)": "伤口周围的发红、发热、分泌物或肿胀加重。",
@@ -1062,7 +1118,7 @@ const phrases = {
         },
         {
             "id": "returns_6",
-            "english": "Rapid or Irregular Heart Rate (palpitations) with unexplained or severe dizziness.",
+            "english": "Rapid or Irregular Heart Rate (palpitations) with unexplained or severe dizziness.",
             "spanish": "Frecuencia cardíaca rápida o irregular (palpitaciones) con mareo intenso o inexplicable.",
             "cantonese (traditional)": "心跳加快或不規則（心悸），並且伴隨不明原因或嚴重的頭暈。",
             "mandarin (simplified)": "心跳加快或不规则（心悸），并且伴随不明原因或严重的头晕。",
@@ -1082,7 +1138,7 @@ const phrases = {
         },
         {
             "id": "returns_8",
-            "english": "* Sudden Weakness or Numbness in face, arm, or leg—especially on one side of the body.",
+            "english": "* Sudden Weakness or Numbness in face, arm, or leg—especially on one side of the body.",
             "spanish": "* Debilidad o entumecimiento repentino en la cara, el brazo o la pierna, especialmente en un solo lado del cuerpo.",
             "cantonese (traditional)": "* 突發性的臉部、手臂或腿部無力或麻木，尤其在身體單側。",
             "mandarin (simplified)": "* 突发性的面部、手臂或腿部无力或麻木，尤其在身体单侧。",
@@ -1092,7 +1148,7 @@ const phrases = {
         },
         {
             "id": "returns_9",
-            "english": "* Confusion, Disorientation, or Extreme Drowsiness that’s new or significantly worsening.",
+            "english": "* Confusion, Disorientation, or Extreme Drowsiness that's new or significantly worsening.",
             "spanish": "* Confusión, desorientación o somnolencia extrema que sea nueva o esté empeorando.",
             "cantonese (traditional)": "* 新出現或明顯惡化的意識混亂、定向障礙或極度嗜睡。",
             "mandarin (simplified)": "* 新出现或明显加重的意识混乱、定向障碍或极度嗜睡。",
@@ -1102,7 +1158,7 @@ const phrases = {
         },
         {
             "id": "returns_10",
-            "english": "* Seizures or unusual jerking/twitching not previously experienced.",
+            "english": "* Seizures or unusual jerking/twitching not previously experienced.",
             "spanish": "* Convulsiones o movimientos bruscos/espasmos inusuales que no se habían presentado antes.",
             "cantonese (traditional)": "* 出現以往沒有過的癲癇發作或不尋常的抽動/抖動。",
             "mandarin (simplified)": "* 出现以前没有过的癫痫发作或异常抽动/抖动。",
@@ -1112,7 +1168,7 @@ const phrases = {
         },
         {
             "id": "returns_11",
-            "english": "* Severe Headache that is new, or different in character/intensity from prior headaches.",
+            "english": "* Severe Headache that is new, or different in character/intensity from prior headaches.",
             "spanish": "* Dolor de cabeza intenso que sea nuevo o diferente en carácter/intensidad de dolores de cabeza anteriores.",
             "cantonese (traditional)": "* 嚴重的頭痛新出現，或在性質/強度上與以往的頭痛不同。",
             "mandarin (simplified)": "* 新出现的严重头痛，或在性质/强度上与以往头痛不同。",
@@ -1132,7 +1188,7 @@ const phrases = {
         },
         {
             "id": "returns_13",
-            "english": "* Severe or Persistent Nausea/Vomiting, or inability to Keep Down Fluids or solids.",
+            "english": "* Severe or Persistent Nausea/Vomiting, or inability to Keep Down Fluids or solids.",
             "spanish": "* Náuseas/vómitos intensos o persistentes, o incapacidad de retener líquidos o alimentos sólidos.",
             "cantonese (traditional)": "* 嚴重或持續的噁心/嘔吐，或無法保留液體或固體食物。",
             "mandarin (simplified)": "* 严重或持续的恶心/呕吐，或无法保留液体或固体食物。",
@@ -1162,7 +1218,7 @@ const phrases = {
         },
         {
             "id": "returns_16",
-            "english": "* Bleeding from a surgical site that doesn’t stop with gentle pressure.",
+            "english": "* Bleeding from a surgical site that doesn't stop with gentle pressure.",
             "spanish": "* Sangrado en el sitio quirúrgico que no se detiene con presión suave.",
             "cantonese (traditional)": "* 手術部位出血，輕壓無法止血。",
             "mandarin (simplified)": "* 手术部位出血，轻压无法止血。",
@@ -1172,7 +1228,7 @@ const phrases = {
         },
         {
             "id": "returns_17",
-            "english": "* Opening or Separation of incision edges.",
+            "english": "* Opening or Separation of incision edges.",
             "spanish": "* Apertura o separación de los bordes de la incisión.",
             "cantonese (traditional)": "* 手術切口裂開或分離。",
             "mandarin (simplified)": "* 手术切口裂开或分离。",
@@ -1182,7 +1238,7 @@ const phrases = {
         },
         {
             "id": "returns_18",
-            "english": "* Increased Swelling or Pain around the incision area, especially if accompanied by redness or warmth.",
+            "english": "* Increased Swelling or Pain around the incision area, especially if accompanied by redness or warmth.",
             "spanish": "* Aumento de la hinchazón o del dolor alrededor de la incisión, especialmente si hay enrojecimiento o calor.",
             "cantonese (traditional)": "* 切口周圍的腫脹或疼痛加劇，尤其是伴隨紅腫或發熱時。",
             "mandarin (simplified)": "* 切口周围的肿胀或疼痛加重，尤其是伴随红肿或发热时。",
@@ -1202,7 +1258,7 @@ const phrases = {
         },
         {
             "id": "returns_20",
-            "english": "* Suicidal thoughts or severe depression, anxiety, or panic that is escalating.",
+            "english": "* Suicidal thoughts or severe depression, anxiety, or panic that is escalating.",
             "spanish": "* Pensamientos suicidas o depresión, ansiedad o pánico severos que están empeorando.",
             "cantonese (traditional)": "* 自殺念頭或嚴重的憂鬱、焦慮或恐慌加劇。",
             "mandarin (simplified)": "* 自杀念头或严重的抑郁、焦虑或恐慌加重。",
@@ -1389,22 +1445,41 @@ function getPhrase(category, id) {
     return phrases[category].find((p) => p.id === id);
 }
 function render() {
-    const englishOutput = [];
-    const translatedOutput = [];
-    for (const category of categories) {
-        const id = selectedPhrases[category];
-        if (!id)
-            continue;
-        const phrase = getPhrase(category, id);
+    // Clear previous content
+    const englishBox = document.getElementById('english-box');
+    const translatedBox = document.getElementById('translated-box');
+    englishBox.textContent = '';
+    translatedBox.textContent = '';
+    const language = document.getElementById('language-select').value;
+    // Add headers and content for each category
+    categories.forEach(category => {
+        const select = document.getElementById(`select-${category}`);
+        const phrase = getPhrase(category, select.value);
         if (phrase) {
-            englishOutput.push(phrase.english);
-            translatedOutput.push(phrase[selectedLanguage]);
+            // Add appropriate header based on category
+            switch (category) {
+                case 'diet':
+                    englishBox.textContent += headers.diet.english + '\n';
+                    translatedBox.textContent += headers.diet[language] + '\n';
+                    break;
+                case 'habit':
+                    englishBox.textContent += headers.habits.english + '\n';
+                    translatedBox.textContent += headers.habits[language] + '\n';
+                    break;
+                case 'wc':
+                    englishBox.textContent += headers.woundCare.english + '\n';
+                    translatedBox.textContent += headers.woundCare[language] + '\n';
+                    break;
+                case 'returns':
+                    englishBox.textContent += headers.returnPrecautions.english + '\n';
+                    translatedBox.textContent += headers.returnPrecautions[language] + '\n';
+                    break;
+            }
+            // Add the selected phrase
+            englishBox.textContent += phrase.english + '\n\n';
+            translatedBox.textContent += phrase[language] + '\n\n';
         }
-    }
-    const englishBox = document.getElementById("english-box");
-    const translatedBox = document.getElementById("translated-box");
-    englishBox.textContent = englishOutput.join("\n\n");
-    translatedBox.textContent = translatedOutput.join("\n\n");
+    });
 }
 function copyToClipboard() {
     const english = document.getElementById("english-box").textContent;
