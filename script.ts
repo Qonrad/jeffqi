@@ -27,6 +27,9 @@ interface TranslatedHeaders {
   returnPrecautions: {
     [key in Language | 'english']: string;
   };
+  rx: {
+    [key in Language | 'english']: string;
+  };
 }
 
 const headers: TranslatedHeaders = {
@@ -83,6 +86,15 @@ const headers: TranslatedHeaders = {
     'filipino (tagalog)': 'Mga pag-iingat sa pagbabalik:',
     'vietnamese': 'Các lưu ý khi quay lại khám:',
     'russian': 'Рекомендации при возвращении на прием:'
+  },
+  rx: {
+    'english': 'Supportive / General',
+    'spanish': 'Supportive / General',
+    'cantonese (traditional)': 'Supportive / General',
+    'mandarin (simplified)': 'Supportive / General',
+    'filipino (tagalog)': 'Supportive / General',
+    'vietnamese': 'Supportive / General',
+    'russian': 'Supportive / General'
   }
 };
 
@@ -1026,16 +1038,6 @@ const phrases = {
         "russian": "Heme"
       },
       {
-        "id": "rx_40",
-        "english": "Iron supplementation",
-        "spanish": "Suplementación de hierro",
-        "cantonese (traditional)": "補鐵",
-        "mandarin (simplified)": "补铁",
-        "filipino (tagalog)": "Pandagdag na iron",
-        "vietnamese": "Bổ sung sắt",
-        "russian": "Добавки железа"
-      },
-      {
         "id": "rx_41",
         "english": "Rheum",
         "spanish": "Rheum",
@@ -1360,26 +1362,6 @@ const phrases = {
         "russian": "Пожалуйста, приходите на все назначенные проверки раны."
       },
       {
-        "id": "wc_4",
-        "english": "Please continue wound care provided by your home health nurse",
-        "spanish": "Por favor, continúe con el cuidado de la herida provisto por su enfermera de atención domiciliaria.",
-        "cantonese (traditional)": "請繼續接受您的居家護理護士提供的傷口護理。",
-        "mandarin (simplified)": "请继续接受您的居家护理护士所提供的伤口护理。",
-        "filipino (tagalog)": "Mangyaring ipagpatuloy ang pangangalaga sa sugat na ibinibigay ng iyong home health nurse.",
-        "vietnamese": "Vui lòng tiếp tục chăm sóc vết thương do y tá chăm sóc tại nhà cung cấp.",
-        "russian": "Пожалуйста, продолжайте уход за раной, который обеспечивает ваша патронажная медсестра."
-      },
-      {
-        "id": "wc_5",
-        "english": "Venous stasis",
-        "spanish": "Venous stasis",
-        "cantonese (traditional)": "Venous stasis",
-        "mandarin (simplified)": "Venous stasis",
-        "filipino (tagalog)": "Venous stasis",
-        "vietnamese": "Venous stasis",
-        "russian": "Venous stasis"
-      },
-      {
         "id": "wc_6",
         "english": "For venous statis ulcers, please wear compression stockings or wraps. Elevate legs above heart level when possible to reduce swelling. Keep the skin clean and well moisturized to prevent dryness and itching that can lead to further breakdown.",
         "spanish": "Para úlceras por estasis venosa, use medias o vendajes de compresión. Eleve las piernas por encima del nivel del corazón cuando sea posible para reducir la hinchazón. Mantenga la piel limpia y bien humectada para evitar resequedad…",
@@ -1502,17 +1484,25 @@ const phrases = {
             englishBox.textContent += headers.diet.english + '\n';
             translatedBox.textContent += headers.diet[language] + '\n';
             break;
+          case 'activity':
+            englishBox.textContent += headers.activity.english + '\n';
+            translatedBox.textContent += headers.activity[language] + '\n';
+            break;
           case 'habit':
             englishBox.textContent += headers.habits.english + '\n';
             translatedBox.textContent += headers.habits[language] + '\n';
             break;
-          case 'wc':
-            englishBox.textContent += headers.woundCare.english + '\n';
-            translatedBox.textContent += headers.woundCare[language] + '\n';
+          case 'rx':
+            englishBox.textContent += headers.rx.english + '\n';
+            translatedBox.textContent += headers.rx[language] + '\n';
             break;
           case 'returns':
             englishBox.textContent += headers.returnPrecautions.english + '\n';
             translatedBox.textContent += headers.returnPrecautions[language] + '\n';
+            break;
+          case 'wc':
+            englishBox.textContent += headers.woundCare.english + '\n';
+            translatedBox.textContent += headers.woundCare[language] + '\n';
             break;
         }
         
@@ -1521,6 +1511,42 @@ const phrases = {
         translatedBox.textContent += phrase[language] + '\n\n';
       }
     });
+
+    // Add medications if any exist
+    if (medications.length > 0) {
+      // Add medication header
+      englishBox.textContent += "Medications:\n";
+      translatedBox.textContent += "Medications:\n";
+
+      medications.forEach(med => {
+        const frequencyText = medTranslations.frequencies[med.frequency];
+        let prnText = med.prn ? medTranslations.prnReasons[med.prn] : null;
+
+        // English format
+        let englishMedText = `${med.name} ${med.dose} - ${frequencyText.english}`;
+        if (prnText) {
+          englishMedText += ` (${prnText.english})`;
+        }
+        if (med.dateRange) {
+          englishMedText += ` - ${med.dateRange}`;
+        }
+        englishBox.textContent += englishMedText + '\n';
+
+        // Translated format
+        let translatedMedText = `${med.name} ${med.dose} - ${frequencyText[language]}`;
+        if (prnText) {
+          translatedMedText += ` (${prnText[language]})`;
+        }
+        if (med.dateRange) {
+          translatedMedText += ` - ${med.dateRange}`;
+        }
+        translatedBox.textContent += translatedMedText + '\n';
+      });
+
+      // Add extra newline after medications
+      englishBox.textContent += '\n';
+      translatedBox.textContent += '\n';
+    }
   }
   
   function copyToClipboard() {
@@ -1530,14 +1556,234 @@ const phrases = {
     navigator.clipboard.writeText(text);
   }
   
+  // Store medications
+  let medications: Array<{
+    name: string;
+    dose: string;
+    frequency: string;
+    prn?: string;
+    dateRange: string;
+  }> = [];
+  
+  // Initialize medication dropdowns
+  function initializeMedDropdowns() {
+    const frequencySelect = document.getElementById('med-frequency') as HTMLSelectElement;
+    const prnSelect = document.getElementById('med-prn') as HTMLSelectElement;
+  
+    // Clear existing options
+    frequencySelect.innerHTML = '<option value="">Select Frequency</option>';
+    prnSelect.innerHTML = '<option value="">Select PRN (if needed)</option>';
+  
+    // Add frequencies
+    Object.keys(medTranslations.frequencies).forEach((key) => {
+      const value = medTranslations.frequencies[key];
+      const option = document.createElement('option');
+      option.value = key;
+      option.textContent = value.english;
+      frequencySelect.appendChild(option);
+    });
+  
+    // Add PRN reasons
+    Object.keys(medTranslations.prnReasons).forEach((key) => {
+      const value = medTranslations.prnReasons[key];
+      const option = document.createElement('option');
+      option.value = key;
+      option.textContent = value.english;
+      prnSelect.appendChild(option);
+    });
+  }
+  
+  // Add medication to the list
+  function addMedication() {
+    const name = (document.getElementById('med-name') as HTMLInputElement).value;
+    const dose = (document.getElementById('med-dose') as HTMLInputElement).value;
+    const frequency = (document.getElementById('med-frequency') as HTMLSelectElement).value;
+    const prn = (document.getElementById('med-prn') as HTMLSelectElement).value;
+    const dateRange = (document.getElementById('med-date-range') as HTMLInputElement).value;
+  
+    if (!name || !dose || !frequency) {
+      alert('Please fill in at least the medication name, dose, and frequency');
+      return;
+    }
+  
+    medications.push({
+      name,
+      dose,
+      frequency,
+      prn: prn || undefined,
+      dateRange
+    });
+  
+    // Clear inputs
+    (document.getElementById('med-name') as HTMLInputElement).value = '';
+    (document.getElementById('med-dose') as HTMLInputElement).value = '';
+    (document.getElementById('med-frequency') as HTMLSelectElement).value = '';
+    (document.getElementById('med-prn') as HTMLSelectElement).value = '';
+    (document.getElementById('med-date-range') as HTMLInputElement).value = '';
+  
+    // Trigger render
+    render();
+  }
+  
   document.addEventListener("DOMContentLoaded", () => {
+    // Initialize category dropdowns
     for (const category of categories) {
       populateDropdown(category);
     }
   
+    // Initialize medication dropdowns
+    initializeMedDropdowns();
+  
+    // Set up language change handler
     const langSelect = document.getElementById("language-select") as HTMLSelectElement;
     langSelect.addEventListener("change", () => {
       selectedLanguage = langSelect.value as Language;
       render();
     });
+  
+    // Make addMedication available globally
+    (window as any).addMedication = addMedication;
   });
+
+  interface TranslatedText {
+    english: string;
+    spanish: string;
+    "cantonese (traditional)": string;
+    "mandarin (simplified)": string;
+    "filipino (tagalog)": string;
+    vietnamese: string;
+    russian: string;
+  }
+
+  interface MedTranslations {
+    frequencies: {
+      [key: string]: TranslatedText;
+    };
+    prnReasons: {
+      [key: string]: TranslatedText;
+    };
+  }
+
+  const medTranslations: MedTranslations = {
+    frequencies: {
+      "once_morning": {
+        english: "Once in the morning",
+        spanish: "Una vez por la mañana",
+        "cantonese (traditional)": "每日早上一次",
+        "mandarin (simplified)": "每日早晨一次",
+        "filipino (tagalog)": "Isang beses tuwing umaga",
+        vietnamese: "Uống một lần vào buổi sáng",
+        russian: "Один раз утром"
+      },
+      "once_afternoon": {
+        english: "Once in the afternoon",
+        spanish: "Una vez por la tarde",
+        "cantonese (traditional)": "每日下午一次",
+        "mandarin (simplified)": "每日下午一次",
+        "filipino (tagalog)": "Isang beses tuwing hapon",
+        vietnamese: "Uống một lần vào buổi chiều",
+        russian: "Один раз днём"
+      },
+      "twice_daily": {
+        english: "Twice a day",
+        spanish: "Dos veces al día",
+        "cantonese (traditional)": "每日兩次",
+        "mandarin (simplified)": "每日两次",
+        "filipino (tagalog)": "Dalawang beses sa isang araw",
+        vietnamese: "Uống hai lần mỗi ngày",
+        russian: "Два раза в день"
+      },
+      "three_times_daily": {
+        english: "Three times a day",
+        spanish: "Tres veces al día",
+        "cantonese (traditional)": "每日三次",
+        "mandarin (simplified)": "每日三次",
+        "filipino (tagalog)": "Tatlong beses sa isang araw",
+        vietnamese: "Uống ba lần mỗi ngày",
+        russian: "Три раза в день"
+      },
+      "four_times_daily": {
+        english: "Four times a day",
+        spanish: "Cuatro veces al día",
+        "cantonese (traditional)": "每日四次",
+        "mandarin (simplified)": "每日四次",
+        "filipino (tagalog)": "Apat na beses sa isang araw",
+        vietnamese: "Uống bốn lần mỗi ngày",
+        russian: "Четыре раза в день"
+      },
+      "bedtime": {
+        english: "Before bedtime",
+        spanish: "Antes de acostarse",
+        "cantonese (traditional)": "睡前服一次",
+        "mandarin (simplified)": "睡前服一次",
+        "filipino (tagalog)": "Isang beses bago matulog",
+        vietnamese: "Uống một lần trước khi ngủ",
+        russian: "Один раз перед сном"
+      },
+      "weekly": {
+        english: "Once weekly",
+        spanish: "Una vez a la semana",
+        "cantonese (traditional)": "每週一次",
+        "mandarin (simplified)": "每周一次",
+        "filipino (tagalog)": "Isang beses sa isang linggo",
+        vietnamese: "Uống một lần mỗi tuần",
+        russian: "Раз в неделю"
+      },
+      "alternate_days": {
+        english: "Every other day",
+        spanish: "Un día sí, un día no",
+        "cantonese (traditional)": "隔日一次",
+        "mandarin (simplified)": "隔日一次",
+        "filipino (tagalog)": "Isang beses kada dalawang araw",
+        vietnamese: "Uống cách ngày",
+        russian: "Через день"
+      }
+    },
+    prnReasons: {
+      "pain": {
+        english: "As needed for pain",
+        spanish: "Según necesidad para el dolor",
+        "cantonese (traditional)": "如有痛才服",
+        "mandarin (simplified)": "按需要用于疼痛",
+        "filipino (tagalog)": "Kung kinakailangan para sa pananakit",
+        vietnamese: "Dùng khi cần giảm đau",
+        russian: "По мере необходимости при боли"
+      },
+      "anxiety": {
+        english: "As needed for anxiety",
+        spanish: "Según necesidad para la ansiedad",
+        "cantonese (traditional)": "如有焦慮才服",
+        "mandarin (simplified)": "按需要用于焦虑",
+        "filipino (tagalog)": "Kung kinakailangan para sa pagkabalisa",
+        vietnamese: "Dùng khi cần cho lo âu",
+        russian: "По мере необходимости при тревоге"
+      },
+      "chest_pain": {
+        english: "As needed for chest pain",
+        spanish: "Según necesidad para el dolor de pecho",
+        "cantonese (traditional)": "如有胸痛才服",
+        "mandarin (simplified)": "按需要用于胸痛",
+        "filipino (tagalog)": "Kung kinakailangan para sa sakit sa dibdib",
+        vietnamese: "Dùng khi cần cho đau ngực",
+        russian: "По мере необходимости при боли в груди"
+      },
+      "shortness_of_breath": {
+        english: "As needed for shortness of breath",
+        spanish: "Según necesidad para la falta de aire",
+        "cantonese (traditional)": "如氣促才服",
+        "mandarin (simplified)": "按需要用于呼吸急促",
+        "filipino (tagalog)": "Kung kinakailangan para sa hirap sa paghinga",
+        vietnamese: "Dùng khi cần cho khó thở",
+        russian: "По мере необходимости при одышке"
+      },
+      "nausea": {
+        english: "As needed for nausea / vomiting",
+        spanish: "Según necesidad para náuseas/vómitos",
+        "cantonese (traditional)": "如噁心/嘔吐才服",
+        "mandarin (simplified)": "按需要用于恶心/呕吐",
+        "filipino (tagalog)": "Kung kinakailangan para sa pagduduwal/pagsusuka",
+        vietnamese: "Dùng khi cần cho buồn nôn/nôn",
+        russian: "По мере необходимости при тошноте/рвоте"
+      }
+    }
+  };

@@ -48,6 +48,32 @@
       padding: 0.75rem;
       font-size: 1rem;
     }
+
+    .med-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .med-input {
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    
+    .med-add-btn {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 0.5rem;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    
+    .med-add-btn:hover {
+      background-color: #45a049;
+    }
   </style>
 </head>
 <body>
@@ -75,6 +101,23 @@
       <div class="section">
         <label for="select-rx">Medications (Rx)</label>
         <select id="select-rx"></select>
+      </div>
+
+      <!-- New Medication Section -->
+      <div class="section" id="new-med-section">
+        <label>New Medication</label>
+        <div class="med-input-group">
+          <input type="text" id="med-name" placeholder="Medication Name" class="med-input">
+          <input type="text" id="med-dose" placeholder="Dose" class="med-input">
+          <select id="med-frequency" class="med-input">
+            <option value="">Select Frequency</option>
+          </select>
+          <select id="med-prn" class="med-input">
+            <option value="">Select PRN (if needed)</option>
+          </select>
+          <input type="text" id="med-date-range" placeholder="Date Range" class="med-input">
+          <button onclick="addMedication()" class="med-add-btn">Add Medication</button>
+        </div>
       </div>
 
       <div class="section">
