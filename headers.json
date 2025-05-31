@@ -1,0 +1,56 @@
+{
+    "diet": {
+        "english": "Dietary recommendations:",
+        "spanish": "Recomendaciones dietéticas:",
+        "cantonese (traditional)": "飲食建議：",
+        "mandarin (simplified)": "饮食建议：",
+        "filipino (tagalog)": "Mga rekomendasyon sa pagkain:",
+        "vietnamese": "Khuyến nghị về chế độ ăn:",
+        "russian": "Рекомендации по питанию:"
+    },
+    "habit": {
+        "english": "Habits consulting:",
+        "spanish": "Asesoramiento sobre hábitos:",
+        "cantonese (traditional)": "習慣指導：",
+        "mandarin (simplified)": "习惯指导：",
+        "filipino (tagalog)": "Konsultasyon sa mga nakasanayan:",
+        "vietnamese": "Tư vấn về thói quen:",
+        "russian": "Консультация по привычкам:"
+    },
+    "returns": {
+        "english": "Please contact your doctor or return to the emergency room for:",
+        "spanish": "Por favor, comuníquese con su médico o regrese a la sala de emergencias por:",
+        "cantonese (traditional)": "如有以下情況，請聯絡您的醫生或返回急診室：",
+        "mandarin (simplified)": "如有以下情况，请联系您的医生或返回急诊室：",
+        "filipino (tagalog)": "Mangyaring makipag‑ugnayan sa iyong doktor o bumalik sa emergency room para sa:",
+        "vietnamese": "Vui lòng liên hệ bác sĩ của bạn hoặc quay lại phòng cấp cứu khi:",
+        "russian": "Пожалуйста, свяжитесь с вашим врачом или вернитесь в отделение неотложной помощи при:"
+    },
+    "wc": {
+        "english": "Wound care instructions:",
+        "spanish": "Instrucciones para el cuidado de la herida:",
+        "cantonese (traditional)": "傷口護理指示：",
+        "mandarin (simplified)": "伤口护理指示：",
+        "filipino (tagalog)": "Mga tagubilin sa pangangalaga ng sugat:",
+        "vietnamese": "Hướng dẫn chăm sóc vết thương:",
+        "russian": "Инструкции по уходу за раной:"
+    },
+    "activity": {
+        "english": "Activity:",
+        "spanish": "Actividad:",
+        "cantonese (traditional)": "活動：",
+        "mandarin (simplified)": "活动：",
+        "filipino (tagalog)": "Aktibidad:",
+        "vietnamese": "Hoạt động:",
+        "russian": "Активность:"
+    },
+    "followUp": {
+        "english": "Follow up",
+        "spanish": "Seguimiento",
+        "cantonese (traditional)": "後續檢查",
+        "mandarin (simplified)": "后续就诊",
+        "filipino (tagalog)": "Pagsubaybay",
+        "vietnamese": "Tái khám / Theo dõi",
+        "russian": "Дальнейшее наблюдение"
+    }
+} 
