@@ -39,38 +39,6 @@ let phrases: { [key: string]: Array<{ id: string } & TranslatedText> };
 // Track selected language
 let selectedLanguage: Language = 'english';
 
-// Load JSON data
-async function loadData() {
-    try {
-        const [headersResponse, phrasesResponse] = await Promise.all([
-            fetch('headers.json'),
-            fetch('phrases.json')
-        ]);
-        
-        if (!headersResponse.ok || !phrasesResponse.ok) {
-            throw new Error('Failed to load JSON data');
-        }
-        
-        headers = await headersResponse.json();
-        phrases = await phrasesResponse.json();
-        
-        console.log('Headers loaded:', headers);
-        console.log('Phrases loaded:', phrases);
-        
-        // Initialize the UI after data is loaded
-        initializeLanguageSelector();
-        addDropdownListeners();
-        render();
-    } catch (error) {
-        console.error('Error loading data:', error);
-        // Show error message to user
-        const englishBox = document.getElementById('english-box');
-        if (englishBox) {
-            englishBox.textContent = 'Error loading data. Please make sure you are running this on a local server.';
-        }
-    }
-}
-
 // Function to populate dropdowns
 function populateDropdown(category: string) {
     const select = document.getElementById(`select-${category}`) as HTMLSelectElement;
@@ -144,18 +112,16 @@ function updateTextContent() {
 
 // Function to render the UI
 function render() {
-    if (!headers || !phrases) {
-        console.error('Data not loaded yet');
-        return;
-    }
+    // Update text content
+    updateTextContent();
+}
 
-    // Update all dropdowns
+// Function to initialize the UI
+function initializeUI() {
+    // Populate all dropdowns
     config.categories.forEach(category => {
         populateDropdown(category);
     });
-
-    // Update text content
-    updateTextContent();
 }
 
 // Function to copy text to clipboard
@@ -378,6 +344,10 @@ function initializeLanguageSelector() {
         }
     });
 
+    // Set initial selected language to Spanish (first non-English language)
+    selectedLanguage = config.languages[1] as Language;
+    languageSelect.value = selectedLanguage;
+
     // Add change event listener
     languageSelect.addEventListener('change', () => {
         selectedLanguage = languageSelect.value as Language;
@@ -393,6 +363,39 @@ function addDropdownListeners() {
             select.addEventListener('change', updateTextContent);
         }
     });
+}
+
+// Load JSON data
+async function loadData() {
+    try {
+        const [headersResponse, phrasesResponse] = await Promise.all([
+            fetch('headers.json'),
+            fetch('phrases.json')
+        ]);
+        
+        if (!headersResponse.ok || !phrasesResponse.ok) {
+            throw new Error('Failed to load JSON data');
+        }
+        
+        headers = await headersResponse.json();
+        phrases = await phrasesResponse.json();
+        
+        console.log('Headers loaded:', headers);
+        console.log('Phrases loaded:', phrases);
+        
+        // Initialize the UI after data is loaded
+        initializeLanguageSelector();
+        addDropdownListeners();
+        initializeUI();  // Populate dropdowns
+        render();        // Initial text content update
+    } catch (error) {
+        console.error('Error loading data:', error);
+        // Show error message to user
+        const englishBox = document.getElementById('english-box');
+        if (englishBox) {
+            englishBox.textContent = 'Error loading data. Please make sure you are running this on a local server.';
+        }
+    }
 }
 
 // Initialize everything when the page loads
