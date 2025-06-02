@@ -135,10 +135,20 @@ function copyToClipboard() {
 
 // Function to initialize medication dropdowns
 function initializeMedDropdowns() {
-    const frequencySelect = document.getElementById('frequency-select') as HTMLSelectElement;
-    const prnReasonSelect = document.getElementById('prn-reason-select') as HTMLSelectElement;
+    console.log('Starting initializeMedDropdowns');
+    const frequencySelect = document.getElementById('med-frequency') as HTMLSelectElement;
+    const prnReasonSelect = document.getElementById('med-prn') as HTMLSelectElement;
+    
+    console.log('Found elements:', { 
+        frequencySelect: frequencySelect ? 'yes' : 'no',
+        prnReasonSelect: prnReasonSelect ? 'yes' : 'no'
+    });
     
     if (!frequencySelect || !prnReasonSelect) return;
+
+    console.log('medTranslations object:', medTranslations);
+    console.log('Frequency keys:', Object.keys(medTranslations.frequencies));
+    console.log('PRN reason keys:', Object.keys(medTranslations.prnReasons));
 
     // Populate frequency options
     Object.keys(medTranslations.frequencies).forEach(key => {
@@ -147,6 +157,7 @@ function initializeMedDropdowns() {
         option.value = key;
         option.textContent = translations.english;
         frequencySelect.appendChild(option);
+        console.log('Added frequency option:', key, translations.english);
     });
 
     // Populate PRN reason options
@@ -156,29 +167,61 @@ function initializeMedDropdowns() {
         option.value = key;
         option.textContent = translations.english;
         prnReasonSelect.appendChild(option);
+        console.log('Added PRN reason option:', key, translations.english);
     });
 }
 
 // Function to add a medication
 function addMedication() {
-    const medicationInput = document.getElementById('medication-input') as HTMLInputElement;
-    const frequencySelect = document.getElementById('frequency-select') as HTMLSelectElement;
-    const prnReasonSelect = document.getElementById('prn-reason-select') as HTMLSelectElement;
-    const output = document.getElementById('output') as HTMLTextAreaElement;
+    const medicationInput = document.getElementById('med-name') as HTMLInputElement;
+    const frequencySelect = document.getElementById('med-frequency') as HTMLSelectElement;
+    const prnReasonSelect = document.getElementById('med-prn') as HTMLSelectElement;
+    const englishBox = document.getElementById('english-box') as HTMLPreElement;
+    const translatedBox = document.getElementById('translated-box') as HTMLPreElement;
     
-    if (!medicationInput || !frequencySelect || !prnReasonSelect || !output) return;
+    if (!medicationInput || !frequencySelect || !prnReasonSelect || !englishBox || !translatedBox) {
+        console.error('Could not find all required elements:', {
+            medicationInput: medicationInput ? 'found' : 'missing',
+            frequencySelect: frequencySelect ? 'found' : 'missing',
+            prnReasonSelect: prnReasonSelect ? 'found' : 'missing',
+            englishBox: englishBox ? 'found' : 'missing',
+            translatedBox: translatedBox ? 'found' : 'missing'
+        });
+        return;
+    }
 
     const medication = medicationInput.value.trim();
     const frequency = frequencySelect.value;
     const prnReason = prnReasonSelect.value;
 
-    if (!medication) return;
+    if (!medication) {
+        console.error('No medication name provided');
+        return;
+    }
 
-    const frequencyText = medTranslations.frequencies[frequency][selectedLanguage];
-    const prnReasonText = medTranslations.prnReasons[prnReason][selectedLanguage];
+    if (!frequency) {
+        console.error('No frequency selected');
+        return;
+    }
 
-    const text = `${medication} - ${frequencyText}${prnReason ? ` (${prnReasonText})` : ''}`;
-    output.value += text + '\n';
+    // Get English text for English box
+    const englishFrequencyText = medTranslations.frequencies[frequency].english;
+    const englishPrnReasonText = prnReason ? medTranslations.prnReasons[prnReason].english : '';
+    const englishText = `${medication} - ${englishFrequencyText}${prnReason ? ` (${englishPrnReasonText})` : ''}`;
+
+    // Get translated text for translated box
+    const translatedFrequencyText = medTranslations.frequencies[frequency][selectedLanguage];
+    const translatedPrnReasonText = prnReason ? medTranslations.prnReasons[prnReason][selectedLanguage] : '';
+    const translatedText = `${medication} - ${translatedFrequencyText}${prnReason ? ` (${translatedPrnReasonText})` : ''}`;
+    
+    // Add to both English and translated boxes
+    englishBox.textContent = (englishBox.textContent || '') + englishText + '\n';
+    translatedBox.textContent = (translatedBox.textContent || '') + translatedText + '\n';
+    
+    // Clear the input fields after adding
+    medicationInput.value = '';
+    frequencySelect.value = '';
+    prnReasonSelect.value = '';
 }
 
 // Interface for medication translations
@@ -368,15 +411,24 @@ function addDropdownListeners() {
 // Load JSON data
 async function loadData() {
     try {
+        console.log('Starting loadData');
+        console.log('Attempting to fetch JSON files...');
+        
         const [headersResponse, phrasesResponse] = await Promise.all([
             fetch('headers.json'),
             fetch('phrases.json')
         ]);
         
-        if (!headersResponse.ok || !phrasesResponse.ok) {
-            throw new Error('Failed to load JSON data');
+        console.log('Headers response status:', headersResponse.status);
+        console.log('Phrases response status:', phrasesResponse.status);
+
+        if (!headersResponse.ok) {
+            throw new Error(`Failed to load headers.json: ${headersResponse.status} ${headersResponse.statusText}`);
         }
-        
+        if (!phrasesResponse.ok) {
+            throw new Error(`Failed to load phrases.json: ${phrasesResponse.status} ${phrasesResponse.statusText}`);
+        }
+
         headers = await headersResponse.json();
         phrases = await phrasesResponse.json();
         
@@ -384,16 +436,21 @@ async function loadData() {
         console.log('Phrases loaded:', phrases);
         
         // Initialize the UI after data is loaded
+        console.log('Initializing UI components');
         initializeLanguageSelector();
         addDropdownListeners();
-        initializeUI();  // Populate dropdowns
-        render();        // Initial text content update
-    } catch (error) {
+        initializeUI(); // Populate dropdowns
+        console.log('About to initialize medication dropdowns');
+        initializeMedDropdowns(); // Initialize medication dropdowns
+        console.log('Finished initializing medication dropdowns');
+        render(); // Initial text content update
+    }
+    catch (error) {
         console.error('Error loading data:', error);
         // Show error message to user
-        const englishBox = document.getElementById('english-box');
+        const englishBox = document.getElementById('english-box') as HTMLPreElement;
         if (englishBox) {
-            englishBox.textContent = 'Error loading data. Please make sure you are running this on a local server.';
+            englishBox.textContent = 'Error loading data: ' + (error as Error).message;
         }
     }
 }

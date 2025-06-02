@@ -137,6 +137,29 @@
   </div>
 
   <button onclick="copyToClipboard()">Copy Both</button>
-  <script src="script.js"></script>
+  <script>
+    console.log('Script is loading...');
+    // Add cache-busting query parameter
+    const script = document.createElement('script');
+    script.src = 'script.js?v=' + new Date().getTime();
+    
+    // Add error handling
+    script.onerror = function(error) {
+      console.error('Error loading script.js:', error);
+    };
+    
+    // Add success handling
+    script.onload = function() {
+      console.log('script.js loaded successfully');
+      // Call loadData after script is loaded
+      if (typeof loadData === 'function') {
+        loadData();
+      } else {
+        console.error('loadData function not found');
+      }
+    };
+    
+    document.body.appendChild(script);
+  </script>
 </body>
 </html>
