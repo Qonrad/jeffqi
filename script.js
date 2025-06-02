@@ -59,6 +59,16 @@ function getPhrase(category, id) {
     var _a;
     return (_a = phrases[category]) === null || _a === void 0 ? void 0 : _a.find(p => p.id === id);
 }
+// Add intro text translations
+const introText = {
+    english: "You are admitted to the hospital for treatment and careful monitoring. You are now stable for discharge. Please carefully read the instructions and recommendations below.",
+    spanish: "Ha sido admitido en el hospital para tratamiento y monitoreo cuidadoso. Ahora está estable para el alta. Por favor, lea cuidadosamente las instrucciones y recomendaciones a continuación.",
+    "cantonese (traditional)": "你已經入院接受治療和仔細監察。你現在狀況穩定，可以出院了。請仔細閱讀以下的指示和建議。",
+    "mandarin (simplified)": "您已被接收入院治疗并进行细心监护。现在您的状况稳定，可以出院了。请仔细阅读以下的说明和建议。",
+    "filipino (tagalog)": "Ikaw ay na-admit sa ospital para sa paggamot at masusing pagmamanman. Ikaw ay ngayon ay stable na para sa discharge. Mangyaring basahin ng mabuti ang mga tagubilin at rekomendasyon sa ibaba.",
+    vietnamese: "Bạn đã được nhập viện để điều trị và theo dõi cẩn thận. Bây giờ bạn đã ổn định để xuất viện. Vui lòng đọc kỹ các hướng dẫn và khuyến nghị dưới đây.",
+    russian: "Вас приняли в больницу для лечения и тщательного наблюдения. Сейчас ваше состояние стабильно для выписки. Пожалуйста, внимательно прочитайте инструкции и рекомендации ниже."
+};
 // Function to update the text content
 function updateTextContent() {
     const englishBox = document.getElementById('english-box');
@@ -68,6 +78,9 @@ function updateTextContent() {
         return;
     let englishText = '';
     let translatedText = '';
+    // Add intro text
+    englishText += introText.english + '\n\n';
+    translatedText += introText[selectedLanguage] + '\n\n';
     // Add header for medications if any exist
     if (output === null || output === void 0 ? void 0 : output.value) {
         englishText += medTranslations.header.english + '\n';
