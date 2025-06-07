@@ -15,7 +15,7 @@ const config = {
         'habit',
         'returns',
         'wc'
-    ],asdf
+    ],
     // Define supported languages
     languages: [
         'english',
