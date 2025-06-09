@@ -3,26 +3,26 @@
         
        {
             "id": "diet_0",
-            "english": "There are no specific dietary restrictions. Please continue to eat a healthy and balanced diet.",
-            "spanish": "No hay restricciones dietéticas específicas. Continúe con una alimentación sana y equilibrada.",
-            "cantonese (traditional)": "沒有特定的飲食限制。請繼續維持健康均衡的飲食。",
-            "mandarin (simplified)": "没有特定的饮食限制。请继续保持健康均衡的饮食。",
-            "filipino (tagalog)": "Walang partikular na paghihigpit sa pagkain. Ipagpatuloy ang malusog at balanseng diyeta.",
-            "vietnamese": "Không có hạn chế chế độ ăn cụ thể. Vui lòng tiếp tục ăn uống lành mạnh và cân bằng.",
-            "russian": "Нет особых диетических ограничений. Пожалуйста, продолжайте придерживаться здорового и сбалансированного питания."
-        },
-        {
-            "id": "diet_0",
-            "english": "There are no specific dietary restrictions. Please continue to eat a healthy and balanced diet.",
-            "spanish": "No hay restricciones dietéticas específicas. Continúe con una alimentación sana y equilibrada.",
-            "cantonese (traditional)": "沒有特定的飲食限制。請繼續維持健康均衡的飲食。",
-            "mandarin (simplified)": "没有特定的饮食限制。请继续保持健康均衡的饮食。",
-            "filipino (tagalog)": "Walang partikular na paghihigpit sa pagkain. Ipagpatuloy ang malusog at balanseng diyeta.",
-            "vietnamese": "Không có hạn chế chế độ ăn cụ thể. Vui lòng tiếp tục ăn uống lành mạnh và cân bằng.",
-            "russian": "Нет особых диетических ограничений. Пожалуйста, продолжайте придерживаться здорового и сбалансированного питания."
+            "english": "Please select if applicable.",
+            "spanish": "",
+            "cantonese (traditional)": "",
+            "mandarin (simplified)": "",
+            "filipino (tagalog)": "",
+            "vietnamese": "",
+            "russian": ""
         },
         {
             "id": "diet_1",
+            "english": "There are no specific dietary restrictions. Please continue to eat a healthy and balanced diet.",
+            "spanish": "No hay restricciones dietéticas específicas. Continúe con una alimentación sana y equilibrada.",
+            "cantonese (traditional)": "沒有特定的飲食限制。請繼續維持健康均衡的飲食。",
+            "mandarin (simplified)": "没有特定的饮食限制。请继续保持健康均衡的饮食。",
+            "filipino (tagalog)": "Walang partikular na paghihigpit sa pagkain. Ipagpatuloy ang malusog at balanseng diyeta.",
+            "vietnamese": "Không có hạn chế chế độ ăn cụ thể. Vui lòng tiếp tục ăn uống lành mạnh và cân bằng.",
+            "russian": "Нет особых диетических ограничений. Пожалуйста, продолжайте придерживаться здорового и сбалансированного питания."
+        },
+        {
+            "id": "diet_2",
             "english": "There are no specific dietary restrictions. Please continue to eat a balanced diet with lean protein, whole grains, fruits, and vegetables. Limit Saturated/trans fats, refined sugars, and highly processed foods.",
             "spanish": "No hay restricciones dietéticas específicas. Continúe con una dieta balanceada con proteínas magras, granos integrales, frutas y verduras. Limite las grasas saturadas/trans, los azúcares refinados y los alimentos altamente procesados.",
             "cantonese (traditional)": "沒有特定的飲食限制。請持續均衡飲食，包括瘦肉蛋白、全穀物、水果和蔬菜。限制飽和/反式脂肪、精製糖和高度加工食品。",
@@ -32,7 +32,7 @@
             "russian": "Нет особых ограничений. Продолжайте сбалансированную диету с постным белком, цельными злаками, фруктами и овощами. Ограничьте потребление насыщенных/транс-жиров, рафинированного сахара и высоко переработанных продуктов."
         },
         {
-            "id": "diet_2",
+            "id": "diet_3",
             "english": "Please consume diet with less salt to prevent excess water buildup in your system. See attached page on renal diet.",
             "spanish": "Consuma una dieta con menos sal para evitar la acumulación excesiva de líquido en su organismo. Vea la página adjunta sobre la dieta renal.",
             "cantonese (traditional)": "請減少鹽分攝取，以防止體內滯留過多水分。請參閱附件中的腎臟飲食建議。",
@@ -42,7 +42,7 @@
             "russian": "Употребляйте меньше соли, чтобы избежать избыточного удержания жидкости в организме. См. прилагаемую страницу о почечной диете."
         },
         {
-            "id": "diet_3",
+            "id": "diet_4",
             "english": "Please consume diet with less salt to prevent excess water buildup in your system. See attached page on cardiac diet.",
             "spanish": "Consuma una dieta con menos sal para evitar la acumulación excesiva de líquido en su organismo. Vea la página adjunta sobre la dieta cardíaca.",
             "cantonese (traditional)": "請減少鹽分攝取，以防止體內滯留過多水分。請參閱附件中的心臟飲食建議。",
@@ -52,7 +52,7 @@
             "russian": "Употребляйте меньше соли, чтобы избежать избыточного удержания жидкости. См. прилагаемую страницу о кардиологической диете."
         },
         {
-            "id": "diet_4",
+            "id": "diet_5",
             "english": "Please imit saturated fats and dietary cholesterol and increase fiber (like oats, legumes, fruits) to help lower cholesterol. See attached page on cholesterol lowering diet.",
             "spanish": "Limite las grasas saturadas y el colesterol dietético e incremente la fibra (avena, legumbres, frutas) para ayudar a reducir el colesterol. Vea la página adjunta sobre la dieta para reducir el colesterol.",
             "cantonese (traditional)": "請限制飽和脂肪和飲食中的膽固醇，同時增加纖維（如燕麥、豆類、水果）以幫助降低膽固醇。請參閱附件中的降膽固醇飲食建議。",
@@ -62,7 +62,7 @@
             "russian": "Ограничьте употребление насыщенных жиров и пищевого холестерина, увеличьте потребление клетчатки (овёс, бобовые, фрукты), чтобы снизить уровень холестерина. См. прилагаемую страницу о диете, снижающей холестерин."
         },
         {
-            "id": "diet_5",
+            "id": "diet_6",
             "english": "Please consume a diet with limited sugar and carbohydrates to prevent high sugar levels. See attached page on diabetic diet.",
             "spanish": "Consuma una dieta con cantidades limitadas de azúcar y carbohidratos para prevenir niveles altos de azúcar. Vea la página adjunta sobre la dieta para diabéticos.",
             "cantonese (traditional)": "請限制糖分和碳水化合物的攝取，以避免血糖偏高。請參閱附件中的糖尿病飲食建議。",
@@ -72,7 +72,7 @@
             "russian": "Употребляйте пищу с ограниченным содержанием сахара и углеводов, чтобы предотвратить высокий уровень сахара. См. прилагаемую страницу о диабетической диете."
         },
         {
-            "id": "diet_6",
+            "id": "diet_7",
             "english": "Please consume a diet rich in protein as recommended by our dietitians to improve nutrition. See attached page with recommendations.",
             "spanish": "Consuma una dieta rica en proteínas según la recomendación de nuestros dietistas para mejorar la nutrición. Vea la página adjunta con las recomendaciones.",
             "cantonese (traditional)": "請依照我們營養師的建議，多攝取富含蛋白質的飲食以改善營養。請參閱附件中的建議。",
@@ -82,7 +82,7 @@
             "russian": "Употребляйте пищу, богатую белком, согласно рекомендациям наших диетологов, чтобы улучшить питание. См. прилагаемую страницу с рекомендациями."
         },
         {
-            "id": "diet_7",
+            "id": "diet_8",
             "english": "To reduce aspiration or choking on food, please sit upright when eating or drinking. Ensure slow, careful hewing and swallowing. Follow the appropriate food textures & liquid consistencies recommended by your speech therapists.",
             "spanish": "Para reducir la aspiración o el atragantamiento con la comida, siéntese erguido(a) al comer o beber. Asegúrese de masticar y tragar lentamente. Siga las texturas de alimentos y consistencias de líquidos recomendadas por su terapeuta del habla.",
             "cantonese (traditional)": "為了減少進食或喝水時嗆到或噎住的風險，用餐或喝水時請坐直。務必慢慢且仔細地咀嚼和吞嚥。請遵循語言治療師所建議的食物質地和液體稠度。",
@@ -92,7 +92,7 @@
             "russian": "Чтобы снизить риск аспирации или удушья при приёме пищи, сидите прямо во время еды или питья. Тщательно и медленно пережёвывайте и глотайте. Следуйте рекомендациям логопеда по правильной текстуре пищи и консистенции жидкости."
         },
         {
-            "id": "diet_8",
+            "id": "diet_9",
             "english": "Please consider small and frequent meals as tolerated.",
             "spanish": "Considere comer comidas pequeñas y frecuentes según su tolerancia.",
             "cantonese (traditional)": "視個人情況考慮少量多餐。",
