@@ -133,7 +133,7 @@ function initializeMedDropdowns() {
     const prnReasonSelect = document.getElementById('med-prn');
     console.log('Found elements:', {
         frequencySelect: frequencySelect ? 'yes' : 'no',
-        prnReasonSelect: prnReasonSelect ? 'yes' : 'no'
+        prnReasonSelect: prnReasonSelect ? 'yes' : 'no',
     });
     if (!frequencySelect || !prnReasonSelect)
         return;
@@ -162,13 +162,15 @@ function initializeMedDropdowns() {
 // Function to add a medication
 function addMedication() {
     const medicationInput = document.getElementById('med-name');
+    const doseInput = document.getElementById('med-dose');
     const frequencySelect = document.getElementById('med-frequency');
     const prnReasonSelect = document.getElementById('med-prn');
     const englishBox = document.getElementById('english-box');
     const translatedBox = document.getElementById('translated-box');
-    if (!medicationInput || !frequencySelect || !prnReasonSelect || !englishBox || !translatedBox) {
+    if (!medicationInput || !doseInput || !frequencySelect || !prnReasonSelect || !englishBox || !translatedBox) {
         console.error('Could not find all required elements:', {
             medicationInput: medicationInput ? 'found' : 'missing',
+            doseInput: doseInput ? 'found' : 'missing',
             frequencySelect: frequencySelect ? 'found' : 'missing',
             prnReasonSelect: prnReasonSelect ? 'found' : 'missing',
             englishBox: englishBox ? 'found' : 'missing',
@@ -177,10 +179,15 @@ function addMedication() {
         return;
     }
     const medication = medicationInput.value.trim();
+    const dose = doseInput.value.trim()
     const frequency = frequencySelect.value;
     const prnReason = prnReasonSelect.value;
     if (!medication) {
         console.error('No medication name provided');
+        return;
+    }
+    if (!dose) {
+        console.error('No dose provided');
         return;
     }
     if (!frequency) {
@@ -190,11 +197,11 @@ function addMedication() {
     // Get English text for English box
     const englishFrequencyText = medTranslations.frequencies[frequency].english;
     const englishPrnReasonText = prnReason ? medTranslations.prnReasons[prnReason].english : '';
-    const englishText = `${medication} - ${englishFrequencyText}${prnReason ? ` (${englishPrnReasonText})` : ''}`;
+    const englishText = `${medication} ${dose} - ${englishFrequencyText}${prnReason ? ` (${englishPrnReasonText})` : ''}`;
     // Get translated text for translated box
     const translatedFrequencyText = medTranslations.frequencies[frequency][selectedLanguage];
     const translatedPrnReasonText = prnReason ? medTranslations.prnReasons[prnReason][selectedLanguage] : '';
-    const translatedText = `${medication} - ${translatedFrequencyText}${prnReason ? ` (${translatedPrnReasonText})` : ''}`;
+    const translatedText = `${medication} ${dose} - ${translatedFrequencyText}${prnReason ? ` (${translatedPrnReasonText})` : ''}`;
     // Add to both English and translated boxes
     englishBox.textContent = (englishBox.textContent || '') + englishText + '\n';
     translatedBox.textContent = (translatedBox.textContent || '') + translatedText + '\n';
