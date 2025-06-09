@@ -1,5 +1,16 @@
 {
     "diet": [
+        
+       {
+            "id": "diet_0",
+            "english": "There are no specific dietary restrictions. Please continue to eat a healthy and balanced diet.",
+            "spanish": "No hay restricciones dietéticas específicas. Continúe con una alimentación sana y equilibrada.",
+            "cantonese (traditional)": "沒有特定的飲食限制。請繼續維持健康均衡的飲食。",
+            "mandarin (simplified)": "没有特定的饮食限制。请继续保持健康均衡的饮食。",
+            "filipino (tagalog)": "Walang partikular na paghihigpit sa pagkain. Ipagpatuloy ang malusog at balanseng diyeta.",
+            "vietnamese": "Không có hạn chế chế độ ăn cụ thể. Vui lòng tiếp tục ăn uống lành mạnh và cân bằng.",
+            "russian": "Нет особых диетических ограничений. Пожалуйста, продолжайте придерживаться здорового и сбалансированного питания."
+        },
         {
             "id": "diet_0",
             "english": "There are no specific dietary restrictions. Please continue to eat a healthy and balanced diet.",
