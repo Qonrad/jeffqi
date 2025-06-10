@@ -3,7 +3,7 @@
         
        {
             "id": "diet_0",
-            "english": "Please select if applicable.",
+            "english": "-Please select if applicable-",
             "spanish": "",
             "cantonese (traditional)": "",
             "mandarin (simplified)": "",
@@ -103,7 +103,17 @@
         }
     ],
     "habit": [
-
+        {
+            "id": "habit_0",
+ "english": "-Please select if applicable-",
+            "spanish": "",
+            "cantonese (traditional)": "",
+            "mandarin (simplified)": "",
+            "filipino (tagalog)": "",
+            "vietnamese": "",
+            "russian": ""
+                    },
+        
         {
             "id": "habit_1",
             "english": "Smoking Cessation - It is very important for you to stop all tobacco use, use nicotine replacement if needed, and follow up with your provider or a quit program to support cessation.",
