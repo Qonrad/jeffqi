@@ -89,12 +89,15 @@ function updateTextContent() {
         const phrase = getPhrase(category, select.value);
         if (!phrase || !headers[category])
             return;
-        // Add category header
-        englishText += headers[category].english + '\n';
-        translatedText += headers[category][selectedLanguage] + '\n';
-        // Add phrase content
-        englishText += phrase.english + '\n\n';
-        translatedText += phrase[selectedLanguage] + '\n\n';
+        console.log(phrase.english)
+        if (phrase.english[0] != '-') {
+            // Add category header
+            englishText += headers[category].english + '\n';
+            translatedText += headers[category][selectedLanguage] + '\n';
+            // Add phrase content
+            englishText += phrase.english + '\n\n';
+            translatedText += phrase[selectedLanguage] + '\n\n';        
+        }
     });
     englishBox.textContent = englishText;
     translatedBox.textContent = translatedText;
