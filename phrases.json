@@ -157,6 +157,17 @@
     ],
     "returns": [
         {
+            "id": "returns_0",
+            "english": "-Please select if applicable-",
+            "spanish": "",
+            "cantonese (traditional)": "",
+            "mandarin (simplified)": "",
+            "filipino (tagalog)": "",
+            "vietnamese": "",
+            "russian": ""
+                    },
+        
+        {
             "id": "returns_1",
             "english": "Worsening fever, chills, or sweats.",
             "spanish": "Fiebre que empeora, escalofríos o sudoración.",
@@ -318,6 +329,16 @@
         }
     ],
     "wc": [
+                {
+            "id": "wc_0",
+            "english": "-Please select if applicable-",
+            "spanish": "",
+            "cantonese (traditional)": "",
+            "mandarin (simplified)": "",
+            "filipino (tagalog)": "",
+            "vietnamese": "",
+            "russian": ""
+                    },
         {
             "id": "wc_1",
             "english": "Always wash hands thoroughly with soap and water before touching the wound or dressing, and again afterward.",
