@@ -113,11 +113,10 @@ function initializeUI() {
 }
 // Function to copy text to clipboard
 function copyToClipboard() {
-    const output = document.getElementById('output');
-    if (!output)
-        return;
-    output.select();
-    document.execCommand('copy');
+    const english = document.getElementById("english-box").textContent;
+    const translated = document.getElementById("translated-box").textContent;
+    const text = english + "\n\n" + translated;
+    navigator.clipboard.writeText(text);
 }
 // Function to initialize medication dropdowns
 function initializeMedDropdowns() {
