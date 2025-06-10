@@ -81,13 +81,6 @@ function updateTextContent() {
     // Add intro text
     englishText += introText.english + '\n\n';
     translatedText += introText[selectedLanguage] + '\n\n';
-    // Add header for medications if any exist
-    if (output === null || output === void 0 ? void 0 : output.value) {
-        englishText += medTranslations.header.english + '\n';
-        translatedText += medTranslations.header[selectedLanguage] + '\n';
-        englishText += output.value + '\n\n';
-        translatedText += output.value + '\n\n';
-    }
     // Add content from each category
     config.categories.forEach(category => {
         const select = document.getElementById(`select-${category}`);
@@ -159,6 +152,10 @@ function initializeMedDropdowns() {
         console.log('Added PRN reason option:', key, translations.english);
     });
 }
+
+// Store medications
+let medications = [];
+
 // Function to add a medication
 function addMedication() {
     const medicationInput = document.getElementById('med-name');
@@ -194,6 +191,17 @@ function addMedication() {
         console.error('No frequency selected');
         return;
     }
+
+    if (medications.length == 0) {
+        englishBox.textContent = (englishBox.textContent || '') + medTranslations.header.english + '\n';
+        translatedBox.textContent = (translatedBox.textContent || '') + medTranslations.header[selectedLanguage] + '\n';
+        medications.push({
+            medication,
+            dose,
+            frequency
+        });
+    }
+
     // Get English text for English box
     const englishFrequencyText = medTranslations.frequencies[frequency].english;
     const englishPrnReasonText = prnReason ? medTranslations.prnReasons[prnReason].english : '';
